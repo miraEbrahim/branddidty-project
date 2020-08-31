@@ -21,6 +21,7 @@ module.exports = function(grunt) {
             "src/css/index.css": "src/sass/index.scss",
             "src/css/home.css": "src/sass/home.scss",
             "src/css/cover.css": "src/sass/cover.scss",
+            "src/css/service.css": "src/sass/service.scss",
             },
           }
         },
