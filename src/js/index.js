@@ -1,43 +1,43 @@
-// function to open/close nav
-function toggleNav(){
-  // if nav is open, close it
-  if($("nav").is(":visible")){
-    $("nav").fadeOut();
-    $("button").removeClass("menu");
-  }
-  // if nav is closed, open it
-  else{
-    $("button").addClass("menu");
-    $("nav").fadeIn().css('display', 'flex');
-  }
-}
+var Boxlayout = (function () {
+  var wrapper = document.body,
+    sections = Array.from(document.querySelectorAll(".section")),
+    closeButtons = Array.from(document.querySelectorAll(".close-section")),
+    expandedClass = "is-expanded",
+    hasExpandedClass = "has-expanded-item";
 
-// when clicking + or ☰ button
-$("button").click(function(){
-  // when clicking ☰ button, open nav
-  if($("header").hasClass("open")){
-    toggleNav();
-  }
-  // when clicking + button, open header
-  else{
-    $("header").addClass("open");
-  }
-});
+  return { init: init };
 
-// close nav
-$("#nav-close").click(function(){
-  toggleNav();
-});
+  function init() {
+    _initEvents();
+  }
 
-// scroll to sections
-$("nav li").click(function(){
-  // get index of clicked li and select according section
-  var index = $(this).index();
-  var target = $("content section").eq(index);
-  
-  toggleNav();
-  
-  $('html,body').delay(300).animate({
-    scrollTop: target.offset().top
-  }, 500);
-});
+  function _initEvents() {
+    sections.forEach(function (element) {
+      element.onclick = function () {
+        _openSection(this);
+      };
+    });
+    closeButtons.forEach(function (element) {
+      element.onclick = function (element) {
+        element.stopPropagation();
+        _closeSection(this.parentElement);
+      };
+    });
+  }
+
+  function _openSection(element) {
+    if (!element.classList.contains(expandedClass)) {
+      element.classList.add(expandedClass);
+      wrapper.classList.add(hasExpandedClass);
+    }
+  }
+
+  function _closeSection(element) {
+    if (element.classList.contains(expandedClass)) {
+      element.classList.remove(expandedClass);
+      wrapper.classList.remove(hasExpandedClass);
+    }
+  }
+})();
+
+Boxlayout.init();
