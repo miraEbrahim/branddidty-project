@@ -18,8 +18,9 @@ module.exports = function(grunt) {
             style: 'expanded',
           },
           files: {
-            "src/css/override.css": "src/sass/*.scss",
+            "src/css/index.css": "src/sass/index.scss",
             "src/css/home.css": "src/sass/home.scss",
+            "src/css/cover.css": "src/sass/cover.scss",
             },
           }
         },
